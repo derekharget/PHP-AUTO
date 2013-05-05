@@ -20,6 +20,12 @@ then
   exit
 fi  
 
+if [ -f "/djh/config/INSTALLED" ]
+then
+    echo "System Already Install"
+    exit
+fi
+
 #Update the Users System
 
 yum -y upgrade
@@ -62,3 +68,19 @@ cd /djh/ins/php-5.4.14
 ./configure --enable-fastcgi --enable-fpm --with-mysql --with-pdo-mysql --with-zlib --with-bz2 --enable-zip --with-openssl --with-mhash --with-curl --with-gd --with-jpeg-dir --with-png-dir --with-ttf --enable-ftp --enable-exif --with-freetype-dir --enable-calendar --enable-soap --enable-mbstring --with-libxml-dir=/usr/lib --with-mysqli --with-xmlrpc --enable-intl 
 make -j4
 make install
+
+#configure php.ini
+cp -fr /djh/ins/php-5.4.14/php.ini-production /usr/local/lib/php.ini
+
+#start APC install
+pecl install apc
+
+#PHP-FPM
+cd /usr/local/etc/
+cp -fr php-fpm.conf.default php-fpm.conf
+
+
+#etc etc
+#prevent it from being install twice
+cd /djh/config
+echo "INSTALLED" > INSTALLED
