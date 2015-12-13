@@ -1,9 +1,8 @@
-PHP-AUTO
+General Scripts that I make or use on a regular basis.
 ========
 
-Files for Auto Installer
+Files
 
-Automatic Installer + Configure Tool For 
-APC 3.1.9
-PHP 5.4.14
-Nginx 1.4.0
+File: Nginx1.9withPageSpeed.sh
+
+Installs Nginx with Pagespeed, for Ubuntu
